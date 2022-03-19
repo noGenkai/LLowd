@@ -1,9 +1,9 @@
-<x-jet-dialog-modal wire:model="showModal">
+<x-jet-dialog-modal 
+    wire:model="showModal">
     <x-slot name="title">
         Enter Appointment Details
     </x-slot>
 
-    <x-slot name="content">
         <!-- Form Content-->
         <x-slot name="content">
             <form class="w-full">
