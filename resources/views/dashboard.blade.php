@@ -13,7 +13,7 @@
                 @livewire('blog-header')
                 @livewire('blog-view')
                 @livewire('blog-create')
-         
+
             </div>
         </div>
     </div>
