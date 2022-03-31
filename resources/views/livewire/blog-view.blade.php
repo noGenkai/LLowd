@@ -5,10 +5,10 @@
 
         {{-- List item number one --}}
         @foreach ($blogs as $blog)
-            <li class="group flex p-4 pr-6 focus-within:bg-gray-50 hover:bg-gray-50">
+            <li x-on:click="open = ! open" wire:click="$emit('showBlogDetails', {{ $blog->id }} )" class="group flex p-4 pr-6 focus-within:bg-gray-50 hover:bg-gray-50">
                 <div class="flex-auto">
                     <p class="font-semibold text-gray-900">{{ $blog->title }}</p>
-                    <p class="font-semibold text-gray-900">{{ $blog->text }}</p>
+                    
                     <time datetime="2022-01-15T09:00" class="mt-2 flex items-center text-gray-700">
                         <!-- Heroicon name: solid/clock -->
                         <svg class="mr-2 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
