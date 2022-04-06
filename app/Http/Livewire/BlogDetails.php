@@ -64,6 +64,8 @@ class BlogDetails extends Component
 
     public function render()
     {
-        return view('livewire.blog-details');
+        return view('livewire.blog-details', [
+            'isAdmin' => auth()->user()->isAdmin
+        ]);
     }
 }

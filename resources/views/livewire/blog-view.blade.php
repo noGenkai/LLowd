@@ -20,6 +20,11 @@
                         {{ $blog->date }}
                     </time>
                 </div>
+
+
+
+
+                
                 {{-- Delete Button --}}
                 <a href="#"
                     wire:click="delete({{ $blog->id }})"
