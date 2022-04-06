@@ -55,11 +55,17 @@ class BlogDetails extends Component
     // }
 
     // Delete
-    public function delete($selected_blog_id) {
+    /*public function delete($selected_blog_id) {
 
         Blog::where('id', $selected_blog_id)->delete();
 
-        $this->emit->refreshComponent;
+        
+    }
+    */
+    public function delete($selected_blog_id)
+    {
+        Blog::find($selected_blog_id)->delete();
+        return redirect()->to('/dashboard');
     }
 
     public function render()
