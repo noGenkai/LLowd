@@ -1,6 +1,6 @@
 <x-jet-dialog-modal wire:model="showModal">
     <x-slot name="title">
-        Enter Appointment Details
+        Enter Blog Details
     </x-slot>
 
     <!-- Form Content-->
