@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Blog;
+use Carbon\Carbon;
 
 class BlogCreate extends Component
 {
@@ -37,43 +38,42 @@ class BlogCreate extends Component
         'data.require' => 'Enter your date!'
     ];
 
-     /**
+    /**
      * Pass all property names through the update method and valid in real time.
      * 
      */
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
-
     }
 
     /**
      * This function display modal on DOM.
      * 
      */
-    public function showBlogModal() {
-        
+    public function showBlogModal()
+    {
+
         $this->showModal = true;
     }
 
-    public function saveBlog() 
+    public function saveBlog()
     {
         $this->validate();
- 
+
         Blog::create([
             'title' => $this->title,
             'date' => $this->date,
             'text' => $this->text,
             'liked' => $this->liked
-        ]);  
+        ]);
 
-        $this->reset(); 
+        $this->reset();
 
         session()->flash('message', 'Your event is successfully created.');
 
         $this->emitTo('blog-view', 'refreshComponent');
     }
-
 
     public function render()
     {
