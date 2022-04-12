@@ -14,6 +14,7 @@
                 @livewire('blog-view')
                 @livewire('blog-create')
                 @livewire('blog-details')
+                @livewire('blog-update')
 
             </div>
         </div>
