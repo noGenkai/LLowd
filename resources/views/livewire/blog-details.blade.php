@@ -22,7 +22,7 @@
                 -->
             @if ($isAdmin)
             {{-- Update Button --}}
-            <a href="#" wire:click="update()" class="ml-6 flex-none self-center rounded-md border border-gray-300 bg-white py-2 px-3 font-semibold text-gray-700 opacity-0 shadow-sm hover:bg-gray-50 focus:opacity-100 group-hover:opacity-100">Update<span class="sr-only">Update</span></a>
+            <a href='#' wire:click="update( {{ $selected_blog_id }} )" class="ml-6 flex-none self-center rounded-md border border-gray-300 bg-white py-2 px-3 font-semibold text-gray-700 opacity-0 shadow-sm hover:bg-gray-50 focus:opacity-100 group-hover:opacity-100">Update<span class="sr-only">Update</span></a>
 
             {{-- Delete Button --}}
             <a href="#" wire:click="delete( {{ $selected_blog_id }} )" class="ml-6 flex-none self-center rounded-md border border-gray-300 bg-white py-2 px-3 font-semibold text-gray-700 opacity-0 shadow-sm hover:bg-gray-50 focus:opacity-100 group-hover:opacity-100">Delete<span class="sr-only">Delete</span></a>

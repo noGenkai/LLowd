@@ -49,19 +49,11 @@ class BlogDetails extends Component
 
     }
 
-    // Update
-    // public function update(Blog $blog) {
-    //     echo('Update');
-    // }
-
-    // Delete
-    /*public function delete($selected_blog_id) {
-
-        Blog::where('id', $selected_blog_id)->delete();
-
-        
+    public function update($selected_blog_id)
+    {
+        $this->emit('showUpdateBlogModal', $selected_blog_id);
     }
-    */
+
     public function delete($selected_blog_id)
     {
         Blog::find($selected_blog_id)->delete();
