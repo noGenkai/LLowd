@@ -20,7 +20,8 @@
                         </label>
                         <input wire:model.lazy="title"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-title" name="grid-title" type="text" placeholder="Insert the title of your blog here!" required>
+                            id="grid-title" name="grid-title" type="text"
+                            placeholder="Insert the title of your blog here!" required>
                         @error('title')
                             <span class="error text-red-700 font-bold">{{ $message }}</span>
                         @enderror
@@ -34,7 +35,8 @@
                         </label>
                         <input wire:model.lazy="text"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-text" name="grid-text" type="text" placeholder="Enter text for your blog!" required>
+                            id="grid-text" name="grid-text" type="text" placeholder="Enter text for your blog!"
+                            required>
                         @error('text')
                             <span class="error text-red-700 font-bold">{{ $message }}</span>
                         @enderror

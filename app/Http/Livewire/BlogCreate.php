@@ -24,9 +24,7 @@ class BlogCreate extends Component
      */
     protected $rules = [
         'title' => 'required|max:10',
-        'date' => 'required',
-        'text' => 'required',
-        'liked' => 'required'
+        'text' => 'required'
     ];
 
     /**
@@ -34,8 +32,7 @@ class BlogCreate extends Component
      * 
      */
     protected $messages = [
-        'title.required' => "Yo bro.  Really!  Type in a title.",
-        'data.require' => 'Enter your date!'
+        'title.required' => "Type in a title.",
     ];
 
     /**
@@ -63,7 +60,7 @@ class BlogCreate extends Component
 
         Blog::create([
             'title' => $this->title,
-            'date' => $this->date,
+            'date' => date('m-d-y'),
             'text' => $this->text,
             'liked' => $this->liked
         ]);
