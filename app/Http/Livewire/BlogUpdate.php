@@ -9,6 +9,7 @@ use Carbon\Carbon;
 class BlogUpdate extends Component
 {
     // Variable used to show Modal status
+    public Blog $blog;
     public $showUpdateModal = false;
     public $title;
     public $date;
@@ -66,6 +67,26 @@ class BlogUpdate extends Component
         
     }
 
+    public function updateBlog()
+    {
+        $this->validate();
+
+        $blog = Blog::find($this->selected_blog_id);
+
+        $blog->title = $this->title;
+        $blog->text = $this->text;
+
+        $blog->save();
+        return redirect()->to('/dashboard');
+
+        $this->emitTo('blog-view', 'refreshComponent');
+    }
+
+    // Create an update blog function and pass the $selected_blog_id;
+    // Find the update method needed for this function.
+    // Updating title and text.
+
+    
 
     public function render()
     {

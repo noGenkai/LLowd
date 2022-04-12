@@ -51,7 +51,7 @@
 
     <!-- Form Footer -->
     <x-slot name="footer">
-        <x-jet-button wire:click="updateBlog">Update Blog</x-jet-button>
+        <x-jet-button wire:click="updateBlog()">Update Blog</x-jet-button>
     </x-slot>
 
 </x-jet-dialog-modal>

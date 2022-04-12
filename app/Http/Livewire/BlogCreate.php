@@ -67,8 +67,6 @@ class BlogCreate extends Component
 
         $this->reset();
 
-        session()->flash('message', 'Your event is successfully created.');
-
         $this->emitTo('blog-view', 'refreshComponent');
     }
 
