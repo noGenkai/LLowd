@@ -41,10 +41,10 @@
                         @enderror
                     </div>
 
-                </fieldset>
+                {{-- </fieldset> --}}
 
                 <!-- Company Fieldset 2 -->
-                <fieldset class="w-full border p-2" id="companyFS2">
+                {{-- <fieldset class="w-full border p-2" id="companyFS2"> --}}
 
                     <!-- text Field -->
                     <div class="w-full px-5 mb-6">
