@@ -4,28 +4,36 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Blog;
+use Carbon\Carbon;
 
-class BlogCreate extends Component
+class BlogUpdate extends Component
 {
     // Variable used to show Modal status
-    public $showModal = false;
+    public $showUpdateModal = false;
     public $title;
     public $date;
     public $text;
     public $liked;
+    public $selected_blog_id;
+    public $selected_blog_title;
+    public $selected_blog_text;
 
     // Create listener for Add Blog Button.
-    protected $listeners = ['showBlogModal'];
+    protected function getListeners()
+    {
+        return [
+            'showUpdateBlogModal' => 'showUpdateBlogModal', // A listener for on-click on Blog.show blade.
+            'refreshBlogView' => '$refresh' // A listener for on-click on refresh blade.
+        ];
+    }
 
     /**
      * Here is a list of rules that the values must abid by. 
      * 
      */
     protected $rules = [
-        'title' => 'required|max:10',
-        'date' => 'required',
-        'text' => 'required',
-        'liked' => 'required'
+        'title' => 'required|max:30',
+        'text' => 'required'
     ];
 
     /**
@@ -33,49 +41,34 @@ class BlogCreate extends Component
      * 
      */
     protected $messages = [
-        'title.required' => "Yo bro.  Really!  Type in a title.",
-        'data.require' => 'Enter your date!'
+        'title.required' => "Type in a title.",
     ];
 
-     /**
+    /**
      * Pass all property names through the update method and valid in real time.
      * 
      */
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
-
     }
 
     /**
      * This function display modal on DOM.
      * 
      */
-    public function showBlogModal() {
-        
-        $this->showModal = true;
-    }
-
-    public function saveBlog() 
+    public function showUpdateBlogModal($selected_blog_id)
     {
-        $this->validate();
- 
-        Blog::create([
-            'title' => $this->title,
-            'date' => $this->date,
-            'text' => $this->text,
-        ]);  
-
-        $this->reset(); 
-
-        session()->flash('message', 'Your event is successfully created.');
-
-        $this->emitTo('blog-view', 'refreshComponent');
+        $this->showUpdateModal = True;
+        $this->selected_blog_id = $selected_blog_id;
+        $this->selected_blog_title = Blog::find($this->selected_blog_id)->title;
+        $this->selected_blog_text = Blog::find($this->selected_blog_id)->text;
+        
     }
 
 
     public function render()
     {
-        return view('livewire.blog-create');
+        return view('livewire.blog-update');
     }
 }
