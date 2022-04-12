@@ -33,10 +33,10 @@
                             for="grid-text">
                             Text
                         </label>
-                        <input wire:model.lazy="text"
+                        <textarea wire:model.lazy="text" rows="5"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-text" name="grid-text" type="text" placeholder="Enter text for your blog!"
-                            required>
+                            id="grid-text" name="grid-text" placeholder="Enter text for your blog!"
+                            required> </textarea>
                         @error('text')
                             <span class="error text-red-700 font-bold">{{ $message }}</span>
                         @enderror
