@@ -20,55 +20,23 @@
                         </label>
                         <input wire:model.lazy="title"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-title" name="grid-title" type="text" placeholder="Enter title" required>
+                            id="grid-title" name="grid-title" type="text"
+                            placeholder="Insert the title of your blog here!" required>
                         @error('title')
                             <span class="error text-red-700 font-bold">{{ $message }}</span>
                         @enderror
                     </div>
 
-                    <!-- Date Field -->
-                    <div class="w-full px-5 mb-6">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-date">
-                            Date
-                        </label>
-                        <input wire:model.lazy="date"
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-date" name="grid-date" type="date" placeholder="Enter date"
-                            required>
-                        @error('date')
-                            <span class="error text-red-700 font-bold">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                {{-- </fieldset> --}}
-
-                <!-- Company Fieldset 2 -->
-                {{-- <fieldset class="w-full border p-2" id="companyFS2"> --}}
-
-                    <!-- text Field -->
+                    <!-- Text Field -->
                     <div class="w-full px-5 mb-6">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-text">
                             Text
                         </label>
-                        <input wire:model.lazy="text"
+                        <textarea wire:model.lazy="text" rows="5"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-text" name="grid-text" type="text" placeholder="Enter text" required>
-                        @error('text')
-                            <span class="error text-red-700 font-bold">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <!-- Liked Field -->
-                    <div class="w-full px-5 mb-6">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                            for="grid-liked">
-                            Likes
-                        </label>
-                        <input wire:model.lazy="liked"
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-liked" name="grid-liked" type="checkbox" placeholder="Enter Liked" required>
+                            id="grid-text" name="grid-text" placeholder="Enter text for your blog!"
+                            required> </textarea>
                         @error('text')
                             <span class="error text-red-700 font-bold">{{ $message }}</span>
                         @enderror
@@ -82,7 +50,7 @@
 
     <!-- Form Footer -->
     <x-slot name="footer">
-        <x-jet-button wire:click="saveBlog">Save Blog</x-jet-button>
+        <x-jet-button wire:click="saveBlog">Update Blog</x-jet-button>
     </x-slot>
 
 </x-jet-dialog-modal>
