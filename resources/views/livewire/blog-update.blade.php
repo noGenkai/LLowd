@@ -1,6 +1,6 @@
-<x-jet-dialog-modal wire:model="showModal">
+<x-jet-dialog-modal wire:model="showUpdateModal">
     <x-slot name="title">
-        Enter Blog Details
+        Update Blog Details
     </x-slot>
 
     <!-- Form Content-->
@@ -12,11 +12,12 @@
                 <!-- Company Fieldset 1 -->
                 <fieldset class="w-full border p-2" id="companyFS1">
 
+                    
                     <!-- Title Field -->
                     <div class="w-full px-5 mb-6">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-title">
-                            Title
+                            {{ $selected_blog_title }}
                         </label>
                         <input wire:model.lazy="title"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -31,7 +32,7 @@
                     <div class="w-full px-5 mb-6">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for="grid-text">
-                            Text
+                            {{ $selected_blog_text }}
                         </label>
                         <textarea wire:model.lazy="text" rows="5"
                             class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -50,7 +51,7 @@
 
     <!-- Form Footer -->
     <x-slot name="footer">
-        <x-jet-button wire:click="saveBlog">Update Blog</x-jet-button>
+        <x-jet-button wire:click="updateBlog">Update Blog</x-jet-button>
     </x-slot>
 
 </x-jet-dialog-modal>
