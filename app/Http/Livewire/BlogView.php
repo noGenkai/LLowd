@@ -12,7 +12,7 @@ class BlogView extends Component
     public function delete($id)
     {
         Blog::find($id)->delete();
-
+        return redirect()->to('/dashboard');
     }
 
 
