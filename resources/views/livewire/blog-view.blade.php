@@ -5,8 +5,10 @@
 
         {{-- List item number one --}}
         @foreach ($blogs as $blog)
-            <li x-on:click="open = ! open" wire:click="$emit('showBlogDetails', {{ $blog->id }} )" class="group flex p-4 pr-6 focus-within:bg-gray-50 hover:bg-gray-50">
-                <div class="flex-auto">
+            <li class="group flex p-4 pr-6 focus-within:bg-gray-50 hover:bg-gray-50">
+
+                {{-- Blog Title Section --}}
+                <div x-on:click="open = ! open" wire:click="$emit('showBlogDetails', {{ $blog->id }} )" class="flex-auto">
                     <p class="font-semibold text-gray-900">{{ $blog->title }}</p>
                     
                     <time datetime="2022-01-15T09:00" class="mt-2 flex items-center text-gray-700">
@@ -21,13 +23,8 @@
                     </time>
                 </div>
 
-
-
-
-                
                 {{-- Delete Button --}}
-                <a href="#"
-                    wire:click="delete({{ $blog->id }})"
+                <a wire:click="delete({{ $blog->id }})"
                     class="ml-6 flex-none self-center rounded-md border border-gray-300 bg-white py-2 px-3 font-semibold text-gray-700 opacity-0 shadow-sm hover:bg-gray-50 focus:opacity-100 group-hover:opacity-100">Delete<span
                         class="sr-only">Delete</span></a>
             </li>
