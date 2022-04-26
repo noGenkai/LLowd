@@ -42,6 +42,8 @@
                         @enderror
                     </div>
 
+                    @livewire('upload-files')
+
                 </fieldset>
             </div>
 
@@ -50,7 +52,7 @@
 
     <!-- Form Footer -->
     <x-slot name="footer">
-        <x-jet-button wire:click="saveBlog">Create Blog</x-jet-button>
+        <x-jet-button wire:click.prevent="saveBlog">Create Blog</x-jet-button>
     </x-slot>
 
 </x-jet-dialog-modal>

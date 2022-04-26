@@ -65,6 +65,8 @@ class BlogCreate extends Component
             'liked' => $this->liked
         ]);
 
+        $this->emit('saveAttachments');
+
         $this->reset();
 
         $this->emitTo('blog-view', 'refreshComponent');

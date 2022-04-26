@@ -16,24 +16,15 @@ class UploadFiles extends Component
     public $fileNameArr = []; // Required to save mutliple file names retrieved from the upload form.
     public $fileName;  // Required to save file names from the
     public $selected_blog_id; // Variable to save Blog ID.
-    public $uploadFilesModal = false; // This keeps model hidden until requested.
+    public $uploadFiles; //Variable to hold uploadFiles
+
 
     // Listen for ther component calls
     protected function getListeners()
     {
         return [
-            'showUploadFilesModal' => 'showUploadFilesModal',
+            'saveAttachments','saveAttachments'
         ];
-    }
-
-    // Function that fires when listener is activated.
-    public function showUploadFilesModal(Blog $blog) 
-    {
-        // Change the public variable showModelForm from false to true because you are going from not showing the modal to showing it. 
-        $this->uploadFilesModal = true;
-
-        // Accepted emitted project ID from the project view component and save it to a variable on this component.
-        $this->selected_blog_id = $blog->id;
     }
 
     /**
