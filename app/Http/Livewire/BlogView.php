@@ -20,6 +20,7 @@ class BlogView extends Component
     {
         return view('livewire.blog-view', [
             'blogs' => Blog::orderBy('id', 'asc')->paginate(5),
-        ]);
+            'isAdmin' => auth()->user()->isAdmin
+            ]);
     }
 }
