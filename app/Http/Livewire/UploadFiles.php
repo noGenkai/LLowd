@@ -14,8 +14,9 @@ class UploadFiles extends Component
 
     public $files = [];  // Required to save the multiple files from the upload form.
     public $fileNameArr = []; // Required to save mutliple file names retrieved from the upload form.
+    public $attachments = [];
+    public $attachment = [];
     public $fileName;  // Required to save file names from the
-    public $selected_blog_id; // Variable to save Blog ID.
     public $uploadFiles; //Variable to hold uploadFiles
 
 
@@ -31,8 +32,9 @@ class UploadFiles extends Component
      * Created a method called 'saveAttachments'.
      * The instructions from this method will begin when the upload Documents button is clicked on the form.
      */
-    public function saveAttachments()
+    public function saveAttachments($selected_blog_id)
     {
+        $selected_blog_id; // Variable to save Blog ID.
         /**
          * A validation is created to make sure that the files coming under 
          */
@@ -43,11 +45,11 @@ class UploadFiles extends Component
         /**
          * Create a foreach to go through the files array
          */
-        foreach ($this->files as $file) {
+        foreach ($this->attachments as $attachment) {
 
-            $fileName = date("Ymd-hi").'-'.$file->getClientOriginalName(); // Save the original name of the file along with a time stamp in a variable called fileName
+            $fileName = date("Ymd-hi").'-'.$attachment->getClientOriginalName(); // Save the original name of the file along with a time stamp in a variable called fileName
 
-            $path = $file->storeAs('attachments', strval($fileName), 's3-public'); // Save attachment on Amazon S3// Store in the "attachment" directory of the local-themischimney.com bucket with original file name.  The file name must be a string so I obtain the string value from the variable.
+            $path = $attachment->storeAs('attachments', strval($fileName), 's3-public'); // Save attachment on Amazon S3// Store in the "attachment" directory of the bucket with original file name.  The file name must be a string so I obtain the string value from the variable.
 
             $url = 'https://'.env('AWS_BUCKET_PUBLIC').'.s3.amazonaws.com/'.$path; // Put the URL together for the file just uploaded.
             

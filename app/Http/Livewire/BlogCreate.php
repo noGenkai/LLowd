@@ -5,15 +5,20 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Blog;
 use Carbon\Carbon;
+use Livewire\WithFileUploads;
 
 class BlogCreate extends Component
 {
+    //REQUIRED FOR ATTACHMENTS
+    use WithFileUploads;
+
     // Variable used to show Modal status
     public $showModal = false;
     public $title;
     public $date;
     public $text;
     public $liked;
+    public $selected_blog_id;
 
     // Create listener for Add Blog Button.
     protected $listeners = ['showBlogModal'];
@@ -23,7 +28,7 @@ class BlogCreate extends Component
      * 
      */
     protected $rules = [
-        'title' => 'required|max:10',
+        'title' => 'required|max:30',
         'text' => 'required'
     ];
 
@@ -57,15 +62,28 @@ class BlogCreate extends Component
     public function saveBlog()
     {
         $this->validate();
+        
+        $blog = new Blog();
 
-        Blog::create([
-            'title' => $this->title,
-            'date' => date('m-d-y'),
-            'text' => $this->text,
-            'liked' => $this->liked
-        ]);
+        $blog->title = $this->title;
+        $blog->date = date('m-d-y');
+        $blog->text = $this->text;
 
-        $this->emit('saveAttachments');
+        $blog->save();
+
+        // if the project saves successfully, pull id to begin relationship
+
+        //use blog Id to save attachment
+        if ($blog->save()) {
+            $user_id = auth()->user()->id;
+            $blog->users()->sync($user_id);
+        }
+
+        $this->selected_blog_id = $blog->id;
+
+
+
+        $this->emit('saveAttachments, $this->selected_blog_id');
 
         $this->reset();
 
