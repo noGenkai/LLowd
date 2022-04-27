@@ -13,6 +13,7 @@
 
                 <div class="w-full p-4">
                     <img class="mx-auto" src="https://via.placeholder.com/350x150">
+                    <img src="asset('{{ $selected_blog_attachment }}')" alt="">
                 </div>
             </div>
 
