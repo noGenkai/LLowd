@@ -19,6 +19,9 @@ return new class extends Migration
             $table->foreignId('user_id')->default(); // you have to enter the id of the user that the comment belongs to.
             $table->string('file_name')->default();
             $table->string('file_path')->default(); // 
+
+            $table->foreign('blog_id')->references('id')->on('blogs')->onDelete('cascade'); // Take your foreign ID and reference it to the id of the blog table.
+            
             $table->timestamps();
         });
     }
