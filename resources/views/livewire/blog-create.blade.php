@@ -11,7 +11,7 @@
 
                 <!-- Company Fieldset 1 -->
                 <fieldset class="w-full border p-2" id="companyFS1">
-
+                    @csrf
                     <!-- Title Field -->
                     <div class="w-full px-5 mb-6">
                         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -42,8 +42,12 @@
                         @enderror
                     </div>
 
-                    @livewire('upload-files')
-
+                    {{-- Upload Files --}}
+                    <div class="w-full px-5 mb-6">
+                        <input type="file" wire:model.lazy="photos" multiple>
+                        @error('photos.*') <span class="error">{{ $message }}</span> @enderror
+                    </div>                    
+ 
                 </fieldset>
             </div>
 
@@ -52,7 +56,8 @@
 
     <!-- Form Footer -->
     <x-slot name="footer">
-        <x-jet-button wire:click.prevent="saveBlog">Create Blog</x-jet-button>
+        <div class="pr-2"><x-jet-button wire:click.prevent="cancelBlog">Cancel Blog</x-jet-button></div>
+        <div class="pl-2"><x-jet-button wire:click.prevent="saveBlog">Create Blog</x-jet-button></div>
     </x-slot>
 
 </x-jet-dialog-modal>

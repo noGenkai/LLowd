@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Blog;
 use Carbon\Carbon;
 use Livewire\WithFileUploads;
+use App\Models\Attachment;
 
 class BlogCreate extends Component
 {
@@ -19,6 +20,7 @@ class BlogCreate extends Component
     public $text;
     public $liked;
     public $selected_blog_id;
+    public $photos = [];
 
     // Create listener for Add Blog Button.
     protected $listeners = ['showBlogModal'];
@@ -29,7 +31,8 @@ class BlogCreate extends Component
      */
     protected $rules = [
         'title' => 'required|max:30',
-        'text' => 'required'
+        'text' => 'required',
+        'photos.*' => 'required|file|mimes:jpeg,png,jpg,pdf,doc,docx|max:2048', // 12MB Max
     ];
 
     /**
@@ -41,7 +44,7 @@ class BlogCreate extends Component
     ];
 
     /**
-     * Pass all property names through the update method and valid in real time.
+     * Pass all property names through the update method and validate in real time.
      * 
      */
     public function updated($propertyName)
@@ -61,35 +64,61 @@ class BlogCreate extends Component
 
     public function saveBlog()
     {
-        $this->validate();
-        
+
+        // Save the new blog constructor to a variable.
         $blog = new Blog();
 
+        // Input the captured data into the database.
         $blog->title = $this->title;
         $blog->date = date('m-d-y');
         $blog->text = $this->text;
 
+        // Save the captured data
         $blog->save();
 
-        // if the project saves successfully, pull id to begin relationship
-
-        //use blog Id to save attachment
+        /** 
+         * If the project saves successfully, pull id to begin relationship
+         * Use blog Id to save attachment
+        */
         if ($blog->save()) {
-            $user_id = auth()->user()->id;
-            $blog->users()->sync($user_id);
+
+            // If the blog is successfully saved, save the blog ID and pass blog id parameter to uploadFiles using emit. 
+            $this->selected_blog_id = $blog->id;
+           
+            foreach ($this->photos as $photo) {
+                // Write to the database
+                $fileName = date("Ymd-hi").'-'.$photo->getClientOriginalName(); // Save the original name of the file along with a time stamp in a variable called fileName
+
+                $path = $photo->storePublicly('img'); // Store to local environment.
+                // $path = $photo->storeAs('attachments', strval($fileName), 's3-public'); // Save attachment on Amazon S3// Store in the "attachment" directory of the bucket with original file name.  The file name must be a string so I obtain the string value from the variable.
+    
+                // $photo->store('photos');
+                $attachment = new Attachment();
+                $attachment->blog_id = "$this->selected_blog_id";
+                $attachment->user_id = auth()->user()->id;
+                $attachment->file_name = $fileName;
+                $attachment->file_path = $path;
+                
+                $attachment->save();
+            }
         }
 
-        $this->selected_blog_id = $blog->id;
-
-
-
-        $this->emit('saveAttachments, $this->selected_blog_id');
-
+        // Reset the form fields
         $this->reset();
 
+        // The the blog view component.
         $this->emitTo('blog-view', 'refreshComponent');
+        // return redirect()->to('/dashboard');
     }
 
+    public function cancelBlog()
+    {
+        // Reset any form fields that has entered data.
+        $this->reset();
+
+        // Redirect to the dashboard page route.
+        return redirect()->to('/dashboard');
+    }
     public function render()
     {
         return view('livewire.blog-create');
