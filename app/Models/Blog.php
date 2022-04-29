@@ -19,8 +19,8 @@ class Blog extends Model
 
     /**
      * Get the attachments for the Blog.
-     * QUERY: SELECT * FROM Attachment WHERE Blog_id = the selected id.
-     * Attachment Table must have a column of 'Blog_id'.
+     * QUERY: SELECT * FROM attachments WHERE blog_id = the selected id ($this_selected_blog_id).
+     * Attachment Table must have a column of 'blog_id'.
      */
     public function attachments()
     {
