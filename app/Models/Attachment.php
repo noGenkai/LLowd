@@ -13,6 +13,7 @@ class Attachment extends Model
 
     /**
      * Get the Blog that owns the attachment.
+     * QUERY: SELECT blog_id FROM attachments 
      */
     public function blog()
     {
